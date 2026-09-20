@@ -67,8 +67,8 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
 
   .cta-panel {
     position: relative;
-    background: var(--color-ink);
-    color: #f7f6f2;
+    background: var(--color-cta-bg);
+    color: var(--color-cta-fg);
     border-radius: var(--radius-l);
     padding: clamp(56px, 8vw, 104px) clamp(24px, 7vw, 96px);
     text-align: center;
@@ -81,7 +81,7 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.22em;
-    color: #e9a1a6;
+    color: var(--color-cta-accent);
     margin-bottom: 1.4rem;
   }
 
@@ -96,7 +96,7 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
 
   .cta-sub {
     position: relative;
-    color: rgba(247, 246, 242, 0.72);
+    color: var(--color-cta-muted);
     margin-top: 1.4rem;
     font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   }
@@ -111,24 +111,24 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
   }
 
   .cta-btn-primary {
-    background: #f7f6f2;
+    background: var(--color-cta-fg);
     color: var(--color-ink);
   }
 
   .cta-btn-primary:hover {
-    background: #ffffff;
+    filter: brightness(1.06);
     box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.55);
   }
 
   .cta-btn-secondary {
     background: transparent;
-    color: #f7f6f2;
-    border: 1px solid rgba(247, 246, 242, 0.35);
+    color: var(--color-cta-fg);
+    border: 1px solid var(--color-cta-muted);
   }
 
   .cta-btn-secondary:hover {
-    border-color: #f7f6f2;
-    background: rgba(247, 246, 242, 0.08);
+    border-color: var(--color-cta-fg);
+    background: color-mix(in srgb, var(--color-cta-fg) 10%, transparent);
   }
 
   .cta-contact {
@@ -141,7 +141,7 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.9rem 2.2rem;
-    border-top: 1px solid rgba(247, 246, 242, 0.18);
+    border-top: 1px solid var(--color-cta-line);
   }
 
   .cta-contact li {
@@ -149,7 +149,7 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     align-items: center;
     gap: 0.5rem;
     font-size: 0.94rem;
-    color: rgba(247, 246, 242, 0.78);
+    color: var(--color-cta-muted);
   }
 
   .cta-contact a {
@@ -160,11 +160,11 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
   }
 
   .cta-contact a:hover {
-    color: #ffffff;
+    color: var(--color-cta-fg);
   }
 
   .cta-contact :global(.icon) {
-    color: #e9a1a6;
+    color: var(--color-cta-accent);
     flex: none;
   }
 
@@ -174,7 +174,7 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     margin: 1.6rem auto 0;
     font-size: 0.9rem;
     line-height: 1.6;
-    color: rgba(247, 246, 242, 0.6);
+    color: var(--color-cta-faint);
   }
 
   @media (max-width: 480px) {

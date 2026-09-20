@@ -30,6 +30,18 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     </nav>
 
     <div class="header-actions">
+      <button
+        class="theme-toggle theme-toggle--icon"
+        type="button"
+        aria-label="Switch to dark mode"
+      >
+        <span class="theme-icon theme-icon--moon" aria-hidden="true">
+          <Icon name="moon" size={19} strokeWidth={1.75} />
+        </span>
+        <span class="theme-icon theme-icon--sun" aria-hidden="true">
+          <Icon name="sun" size={19} strokeWidth={1.75} />
+        </span>
+      </button>
       {whatsappHref && (
         <a class="header-whatsapp" href={whatsappHref} target="_blank" rel="noopener">
           <Icon name="message-circle" size={17} strokeWidth={1.7} />
@@ -67,6 +79,19 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
       ))}
     </ul>
     <div class="mobile-contact">
+      <button
+        class="theme-toggle theme-toggle--row"
+        type="button"
+        aria-label="Switch to dark mode"
+      >
+        <span class="theme-toggle-row-label">Dark Mode</span>
+        <span class="theme-icon theme-icon--moon" aria-hidden="true">
+          <Icon name="moon" size={18} strokeWidth={1.75} />
+        </span>
+        <span class="theme-icon theme-icon--sun" aria-hidden="true">
+          <Icon name="sun" size={18} strokeWidth={1.75} />
+        </span>
+      </button>
       <a class="btn btn-primary btn-block" href="#booking">
         Book a Visit
       </a>
@@ -124,6 +149,38 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
 
   syncHeader();
   window.addEventListener("scroll", syncHeader, { passive: true });
+
+  const themeBtns = document.querySelectorAll(".theme-toggle");
+  const rootEl = document.documentElement;
+
+  const setTheme = (theme: string) => {
+    rootEl.setAttribute("data-theme", theme);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      /* private mode — in-memory only */
+    }
+  };
+
+  const syncThemeLabels = () => {
+    const dark = rootEl.getAttribute("data-theme") === "dark";
+    themeBtns.forEach((b) => {
+      b.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    });
+    document.querySelectorAll(".theme-toggle-row-label").forEach((l) => {
+      l.textContent = dark ? "Light Mode" : "Dark Mode";
+    });
+  };
+
+  themeBtns.forEach((b) =>
+    b.addEventListener("click", () => {
+      const next = rootEl.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      setTheme(next);
+      syncThemeLabels();
+    }),
+  );
+
+  syncThemeLabels();
 </script>
 
 <style>
@@ -137,7 +194,7 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
   }
 
   .site-header.is-scrolled {
-    background: rgba(247, 246, 242, 0.82);
+    background: var(--color-header-bg);
     -webkit-backdrop-filter: saturate(1.4) blur(16px);
     backdrop-filter: saturate(1.4) blur(16px);
     border-bottom-color: var(--color-line);
@@ -195,6 +252,45 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     display: flex;
     align-items: center;
     gap: 0.9rem;
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink-2);
+    background: transparent;
+    transition: border-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+  }
+
+  .theme-toggle:hover {
+    color: var(--color-ink);
+    border-color: var(--color-line-strong);
+    background: var(--color-layer);
+  }
+
+  .theme-toggle--icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .theme-icon {
+    display: inline-flex;
+  }
+
+  .theme-icon--sun {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .theme-icon--sun {
+    display: inline-flex;
+  }
+
+  :root[data-theme="dark"] .theme-icon--moon {
+    display: none;
   }
 
   .header-whatsapp {
@@ -319,6 +415,22 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     display: grid;
     gap: 0.75rem;
     padding-top: 1.75rem;
+  }
+
+  .theme-toggle--row {
+    justify-content: space-between;
+    width: 100%;
+    min-height: 52px;
+    padding: 0 1.25rem;
+    border-radius: var(--radius-pill);
+    border-color: var(--color-line-strong);
+    font-weight: 550;
+    font-size: 0.98rem;
+    color: var(--color-ink-2);
+  }
+
+  .theme-toggle--row .theme-icon {
+    color: var(--color-accent);
   }
 
   .btn-block {

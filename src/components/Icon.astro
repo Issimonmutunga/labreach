@@ -22,6 +22,8 @@ import timer from "lucide-static/icons/timer.svg?raw";
 import arrowRight from "lucide-static/icons/arrow-right.svg?raw";
 import arrowUpRight from "lucide-static/icons/arrow-up-right.svg?raw";
 import chevronDown from "lucide-static/icons/chevron-down.svg?raw";
+import sun from "lucide-static/icons/sun.svg?raw";
+import moon from "lucide-static/icons/moon.svg?raw";
 
 type IconName =
   | "home"
@@ -46,7 +48,9 @@ type IconName =
   | "timer"
   | "arrow-right"
   | "arrow-up-right"
-  | "chevron-down";
+  | "chevron-down"
+  | "sun"
+  | "moon";
 
 const icons: Record<IconName, string> = {
   home,
@@ -72,6 +76,8 @@ const icons: Record<IconName, string> = {
   "arrow-right": arrowRight,
   "arrow-up-right": arrowUpRight,
   "chevron-down": chevronDown,
+  sun,
+  moon,
 };
 
 interface Props {

@@ -12,6 +12,8 @@ const standards = [
   "Patient privacy and confidentiality",
   "Professional client communication",
 ];
+
+const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
 ---
 
 <section class="section lead" id="about">
@@ -69,9 +71,7 @@ const standards = [
     <ol class="standards-list">
       {standards.map((s, i) => (
         <li class="standard">
-          <span class="standard-num">
-            {String(i + 1).padStart(2, "0")}
-          </span>
+          <span class="standard-num">{roman[i]}</span>
           <span class="standard-label">{s}</span>
           <span class="standard-mark" aria-hidden="true">
             <Icon name="check" size={14} strokeWidth={2} />
@@ -123,10 +123,10 @@ const standards = [
     gap: 0.5rem;
     padding: 0.55rem 1rem;
     border-radius: var(--radius-pill);
-    background: rgba(247, 246, 242, 0.9);
+    background: var(--color-header-bg);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(23, 23, 23, 0.08);
+    border: 1px solid var(--color-line);
     font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -220,7 +220,7 @@ const standards = [
   }
 
   .standard:hover {
-    background: rgba(247, 246, 242, 0.6);
+    background: var(--color-layer-strong);
   }
 
   .standard:nth-child(odd) {
@@ -229,11 +229,11 @@ const standards = [
 
   .standard-num {
     font-variant-numeric: tabular-nums;
-    font-size: 0.82rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     color: var(--color-accent);
-    min-width: 2rem;
+    min-width: 2.6rem;
   }
 
   .standard-label {
@@ -261,15 +261,6 @@ const standards = [
     color: var(--color-surface);
   }
 
-  @media (max-width: 900px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-    }
-    .about-media {
-      max-width: 460px;
-    }
-  }
-
   @media (max-width: 640px) {
     .standards-list {
       grid-template-columns: 1fr;
@@ -279,6 +270,15 @@ const standards = [
     }
     .standard:nth-child(odd) {
       padding-right: 0.5rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-media {
+      max-width: 460px;
     }
   }
 </style>

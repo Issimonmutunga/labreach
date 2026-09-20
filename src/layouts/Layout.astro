@@ -47,6 +47,28 @@ const jsonLd = {
 
     <style is:inline set:html={fontFace} />
 
+    <script is:inline>
+      (function () {
+        var saved;
+        try {
+          saved = localStorage.getItem("theme");
+        } catch (e) {
+          saved = null;
+        }
+        var theme =
+          saved === "dark" || saved === "light"
+            ? saved
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        var root = document.documentElement;
+        root.setAttribute("data-theme", theme);
+        root.style.colorScheme = theme;
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", theme === "dark" ? "#1a1917" : "#f7f6f2");
+      })();
+    </script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
