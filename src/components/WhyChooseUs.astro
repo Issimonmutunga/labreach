@@ -5,33 +5,45 @@ const benefits = [
   {
     icon: "clock" as const,
     title: "Convenience",
-    copy: "Laboratory sample collection without unnecessary travel.",
+    copy: "Sample collection without unnecessary travel.",
   },
   {
     icon: "shield-check" as const,
     title: "Professional Service",
-    copy: "Collection performed by qualified medical laboratory professionals.",
+    copy: "Performed by qualified medical laboratory professionals.",
   },
   {
     icon: "lock-keyhole" as const,
     title: "Privacy",
-    copy: "Your personal information and laboratory information are handled confidentially.",
+    copy: "Your personal and laboratory information handled confidentially.",
   },
   {
     icon: "timer" as const,
     title: "Time Saving",
-    copy: "Book a scheduled visit around your daily routine.",
+    copy: "A scheduled visit that fits into your daily routine.",
   },
   {
     icon: "droplet" as const,
     title: "Quality Focus",
-    copy: "We recognise that accurate laboratory testing begins with proper specimen collection and handling.",
+    copy: "Accurate testing begins with proper collection and handling.",
   },
   {
     icon: "hand-heart" as const,
     title: "Patient-Centred",
-    copy: "We aim to provide a respectful, comfortable and professional collection experience.",
+    copy: "A respectful, comfortable and professional experience.",
   },
+];
+
+const groups = [
+  "Individuals",
+  "Families",
+  "Busy professionals",
+  "Elderly clients",
+  "Home-based clients",
+  "Travellers",
+  "Corporate organisations",
+  "Scheduled follow-up appointments",
+  "Private and convenient collection",
 ];
 ---
 
@@ -45,19 +57,29 @@ const benefits = [
     <ul class="benefits">
       {benefits.map((b, i) => (
         <li class="benefit" data-reveal style={`--reveal-delay:${(i % 3) * 70}ms`}>
-          <span class="benefit-icon"><Icon name={b.icon} size={22} strokeWidth={1.5} /></span>
+          <span class="benefit-icon"><Icon name={b.icon} size={20} strokeWidth={1.5} /></span>
           <h3 class="benefit-title">{b.title}</h3>
           <p class="benefit-copy">{b.copy}</p>
         </li>
       ))}
     </ul>
+
+    <div class="who" data-reveal>
+      <h3 class="h3 who-title">Healthcare That Fits Your Day</h3>
+      <p class="who-sub">Our home collection service can support:</p>
+      <ul class="who-list">
+        {groups.map((g) => (
+          <li class="who-pill">{g}</li>
+        ))}
+      </ul>
+    </div>
   </div>
 </section>
 
 <style>
   .why-head {
     max-width: 40rem;
-    margin-bottom: clamp(36px, 5vw, 56px);
+    margin-bottom: clamp(32px, 5vw, 52px);
   }
 
   .why-head h2 {
@@ -74,7 +96,7 @@ const benefits = [
   }
 
   .benefit {
-    padding: clamp(26px, 3vw, 40px);
+    padding: clamp(24px, 2.8vw, 34px);
     background: var(--color-surface);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-m);
@@ -92,25 +114,67 @@ const benefits = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
     background: var(--color-accent-soft);
     color: var(--color-accent);
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.2rem;
   }
 
   .benefit-title {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 600;
     letter-spacing: -0.015em;
-    margin-bottom: 0.55rem;
+    margin-bottom: 0.45rem;
   }
 
   .benefit-copy {
     color: var(--color-ink-2);
-    font-size: 0.97rem;
-    line-height: 1.65;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .who {
+    margin-top: clamp(48px, 7vw, 80px);
+    padding-top: clamp(28px, 4vw, 44px);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .who-title {
+    margin-bottom: 0.4rem;
+  }
+
+  .who-sub {
+    color: var(--color-ink-2);
+    margin-bottom: 1.4rem;
+  }
+
+  .who-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .who-pill {
+    padding: 0.62rem 1.15rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-line-strong);
+    background: rgba(255, 255, 255, 0.5);
+    font-size: 0.94rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  }
+
+  .who-pill:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 1024px) {

@@ -1,6 +1,17 @@
 ---
 import { site } from "../config/site";
 import Icon from "./Icon.astro";
+
+const standards = [
+  "Proper patient identification",
+  "Appropriate specimen collection",
+  "Infection-prevention practices",
+  "Correct specimen labelling",
+  "Appropriate specimen handling",
+  "Safe specimen transportation",
+  "Patient privacy and confidentiality",
+  "Professional client communication",
+];
 ---
 
 <section class="section lead" id="about">
@@ -39,11 +50,9 @@ import Icon from "./Icon.astro";
         <p>
           Our service is led by Jeff Nyakaba, a medical laboratory professional
           with experience in laboratory operations, specimen collection, patient
-          engagement and quality-focused healthcare service delivery.
-        </p>
-        <p>
-          His approach combines professional laboratory practice with a strong
-          focus on patient experience, specimen quality and convenience.
+          engagement and quality-focused healthcare service delivery. His
+          approach combines professional laboratory practice with a strong focus
+          on patient experience, specimen quality and convenience.
         </p>
       </div>
 
@@ -51,6 +60,26 @@ import Icon from "./Icon.astro";
         <p>“Quality laboratory testing starts with quality specimen collection.”</p>
       </blockquote>
     </div>
+  </div>
+
+  <div class="container standards" data-reveal>
+    <div class="standards-head">
+      <h3 class="standards-title">Our Professional Standards</h3>
+      <p class="standards-sub">Precision and process discipline on every visit.</p>
+    </div>
+    <ol class="standards-list">
+      {standards.map((s, i) => (
+        <li class="standard">
+          <span class="standard-num">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <span class="standard-label">{s}</span>
+          <span class="standard-mark" aria-hidden="true">
+            <Icon name="check" size={14} strokeWidth={2} />
+          </span>
+        </li>
+      ))}
+    </ol>
   </div>
 </section>
 
@@ -125,31 +154,117 @@ import Icon from "./Icon.astro";
     font-weight: 550;
     font-size: 0.98rem;
     margin-top: 0.35rem;
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.5rem;
   }
 
   .about-body p {
     color: var(--color-ink-2);
     max-width: 34rem;
-    margin-bottom: 1rem;
   }
 
   .about-quote {
     position: relative;
     max-width: 34rem;
-    padding: 1.6rem 1.8rem;
-    margin-top: 1.8rem;
+    padding: 1.5rem 1.7rem;
+    margin-top: 1.6rem;
     border-radius: var(--radius-m);
     background: var(--color-accent-soft);
     border-left: 3px solid var(--color-accent);
   }
 
   .about-quote p {
-    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    font-size: clamp(1.1rem, 1.7vw, 1.35rem);
     font-weight: 500;
     letter-spacing: -0.015em;
     line-height: 1.45;
     color: var(--color-ink);
+  }
+
+  /* Standards (merged into About) */
+  .standards {
+    margin-top: clamp(56px, 8vw, 88px);
+    padding-top: clamp(28px, 4vw, 44px);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .standards-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .standards-title {
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .standards-sub {
+    color: var(--color-ink-3);
+    font-size: 0.95rem;
+  }
+
+  .standards-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--color-line-strong);
+  }
+
+  .standard {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    padding: 1.1rem 0.5rem;
+    border-bottom: 1px solid var(--color-line);
+    transition: background-color var(--dur-med) var(--ease-out);
+  }
+
+  .standard:hover {
+    background: rgba(247, 246, 242, 0.6);
+  }
+
+  .standard:nth-child(odd) {
+    padding-right: 1.5rem;
+  }
+
+  .standard-num {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    min-width: 2rem;
+  }
+
+  .standard-label {
+    font-size: clamp(0.98rem, 1.3vw, 1.1rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .standard-mark {
+    margin-left: auto;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink-3);
+  }
+
+  .standard:hover .standard-mark {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-surface);
   }
 
   @media (max-width: 900px) {
@@ -158,6 +273,18 @@ import Icon from "./Icon.astro";
     }
     .about-media {
       max-width: 460px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .standards-list {
+      grid-template-columns: 1fr;
+    }
+    .standard {
+      align-items: center;
+    }
+    .standard:nth-child(odd) {
+      padding-right: 0.5rem;
     }
   }
 </style>

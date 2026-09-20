@@ -17,22 +17,8 @@ const whatsappBase = whatsappLink("");
         <span class="booking-sub-label">Request a Collection</span>
       </p>
       <p class="lede booking-lede">
-        Tell us about your collection needs and we will take care of the rest.
+        Tell us about your collection needs — we'll handle the rest.
       </p>
-      <ul class="booking-notes">
-        <li>
-          <Icon name="check" size={15} strokeWidth={2} />
-          Confirmed appointment by our team
-        </li>
-        <li>
-          <Icon name="check" size={15} strokeWidth={2} />
-          Clear collection requirements
-        </li>
-        <li>
-          <Icon name="check" size={15} strokeWidth={2} />
-          Applicable charges shared upfront
-        </li>
-      </ul>
 
       <p class="booking-alt-label">Prefer to chat first?</p>
       {whatsappHref ? (
@@ -334,27 +320,6 @@ const whatsappBase = whatsappLink("");
   .booking-lede {
     max-width: 32rem;
     margin-bottom: 1.6rem;
-  }
-
-  .booking-notes {
-    list-style: none;
-    margin: 0 0 2rem;
-    padding: 0;
-    display: grid;
-    gap: 0.7rem;
-  }
-
-  .booking-notes li {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    color: var(--color-ink-2);
-    font-size: 0.97rem;
-  }
-
-  .booking-notes :global(.icon) {
-    color: var(--color-accent);
-    flex: none;
   }
 
   .booking-alt-label {

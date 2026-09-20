@@ -42,6 +42,7 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
       <button
         class="nav-toggle"
         id="nav-toggle"
+        type="button"
         aria-expanded="false"
         aria-controls="mobile-menu"
         aria-label="Open menu"
@@ -51,25 +52,33 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
       </button>
     </div>
   </div>
+</header>
 
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+  <div class="mobile-menu-inner">
     <ul>
       {nav.map((item) => (
-        <li><a href={item.href}><span>{item.label}</span><Icon name="arrow-up-right" size={16} /></a></li>
-      ))}
-      <li class="mobile-contact">
-        <a class="btn btn-primary btn-block" href="#booking">
-          Book a Visit
-        </a>
-        {whatsappHref && (
-          <a class="btn btn-secondary btn-block" href={whatsappHref} target="_blank" rel="noopener">
-            <Icon name="message-circle" size={17} /> Chat on WhatsApp
+        <li>
+          <a href={item.href}>
+            <span>{item.label}</span>
+            <Icon class="mobile-menu-arrow" name="arrow-up-right" size={18} />
           </a>
-        )}
-      </li>
+        </li>
+      ))}
     </ul>
-  </nav>
-</header>
+    <div class="mobile-contact">
+      <a class="btn btn-primary btn-block" href="#booking">
+        Book a Visit
+      </a>
+      {whatsappHref && (
+        <a class="btn btn-secondary btn-block" href={whatsappHref} target="_blank" rel="noopener">
+          <Icon name="message-circle" size={17} />
+          Chat on WhatsApp
+        </a>
+      )}
+    </div>
+  </div>
+</nav>
 
 <script>
   const header = document.querySelector(".site-header");
@@ -82,18 +91,29 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
 
   const closeMenu = () => {
     toggle?.setAttribute("aria-expanded", "false");
-    header?.classList.remove("menu-open");
     document.body.classList.remove("menu-locked");
+    document.body.classList.remove("menu-open");
+  };
+
+  const setMenu = (open: boolean) => {
+    toggle?.setAttribute("aria-expanded", String(open));
+    document.body.classList.toggle("menu-locked", open);
+    document.body.classList.toggle("menu-open", open);
   };
 
   toggle?.addEventListener("click", () => {
-    const open = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!open));
-    header?.classList.toggle("menu-open", !open);
-    document.body.classList.toggle("menu-locked", !open);
+    setMenu(toggle.getAttribute("aria-expanded") !== "true");
   });
 
   menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+
+  document.addEventListener("click", (e: MouseEvent) => {
+    const target = e.target as Node | null;
+    const inHeader = header?.contains(target);
+    const inMenu = menu?.contains(target);
+    if (!inHeader && !inMenu) closeMenu();
+  });
+
   window.addEventListener("resize", () => {
     if (window.innerWidth > 900) closeMenu();
   });
@@ -201,11 +221,11 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     display: none;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 6px;
     width: 44px;
     height: 44px;
     border-radius: 12px;
-    align-items: center;
   }
 
   .nav-toggle-bar {
@@ -216,54 +236,12 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     transition: transform var(--dur-med) var(--ease-out), opacity var(--dur-med);
   }
 
-  .menu-open .nav-toggle-bar:first-child {
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:first-child {
     transform: translateY(4px) rotate(45deg);
   }
 
-  .menu-open .nav-toggle-bar:last-child {
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:last-child {
     transform: translateY(-4px) rotate(-45deg);
-  }
-
-  .mobile-menu {
-    position: fixed;
-    inset: var(--header-h) 0 0 0;
-    background: var(--color-bg);
-    padding: 1rem 20px 2.5rem;
-    display: none;
-    overflow-y: auto;
-    border-top: 1px solid var(--color-line);
-  }
-
-  .mobile-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem 0 0;
-  }
-
-  .mobile-menu li a:not(.btn) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.05rem 0.25rem;
-    font-size: 1.35rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    border-bottom: 1px solid var(--color-line);
-    color: var(--color-ink);
-  }
-
-  .mobile-contact {
-    display: grid;
-    gap: 0.75rem;
-    padding-top: 1.5rem;
-  }
-
-  .btn-block {
-    width: 100%;
-  }
-
-  body.menu-locked {
-    overflow: hidden;
   }
 
   @media (max-width: 900px) {
@@ -275,9 +253,80 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
       display: flex;
       margin-left: 4px;
     }
-    .site-header.menu-open .mobile-menu {
-      display: block;
+  }
+
+  @media (max-width: 480px) {
+    .btn-header {
+      display: none;
     }
+  }
+
+  /* Mobile menu — rendered outside the sticky header so fixed
+     positioning is never constrained by header filters. */
+  .mobile-menu {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 95;
+    display: none;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-line);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body.menu-open .mobile-menu {
+    display: block;
+  }
+
+  .mobile-menu-inner {
+    max-width: 560px;
+    margin-inline: auto;
+    padding: 0.5rem 20px 3rem;
+  }
+
+  .mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-menu li a:not(.btn) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 58px;
+    padding: 0.9rem 0.25rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    border-bottom: 1px solid var(--color-line);
+    color: var(--color-ink);
+  }
+
+  .mobile-menu a:active {
+    opacity: 0.6;
+  }
+
+  .mobile-menu-arrow {
+    color: var(--color-accent);
+  }
+
+  .mobile-contact {
+    display: grid;
+    gap: 0.75rem;
+    padding-top: 1.75rem;
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  body.menu-locked {
+    overflow: hidden;
   }
 
   @media (min-width: 901px) {
@@ -286,13 +335,9 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     }
   }
 
-  @media (max-width: 480px) {
-    .header-whatsapp {
-      display: none;
-    }
-    .btn-header {
-      padding: 0.6rem 1.1rem;
-      font-size: 0.9rem;
+  @media (max-width: 640px) {
+    :root {
+      --header-h: 64px;
     }
   }
 </style>

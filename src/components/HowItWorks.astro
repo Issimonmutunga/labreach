@@ -5,7 +5,7 @@ const steps = [
   {
     num: "01",
     label: "BOOK",
-    copy: "Send us a WhatsApp message, call us or complete our online booking form.",
+    copy: "Send us a WhatsApp message, call us or complete our booking form.",
   },
   {
     num: "02",
@@ -15,17 +15,17 @@ const steps = [
   {
     num: "03",
     label: "WE COME TO YOU",
-    copy: "A qualified professional arrives at your selected location for specimen collection.",
+    copy: "A qualified professional arrives at your location for collection.",
   },
   {
     num: "04",
     label: "SPECIMEN HANDLING",
-    copy: "Your specimen is correctly identified, labelled and handled for transportation to the designated laboratory.",
+    copy: "Your specimen is identified, labelled and handled for transport to the designated laboratory.",
   },
   {
     num: "05",
     label: "RESULTS",
-    copy: "The designated laboratory processes the specimen and releases the results through its appropriate reporting channels.",
+    copy: "The designated laboratory processes the specimen and releases results through its reporting channels.",
   },
 ];
 ---
@@ -85,7 +85,7 @@ const steps = [
   .pipeline::before {
     content: "";
     position: absolute;
-    top: 34px;
+    top: 30px;
     left: 0;
     right: 0;
     height: 1px;
@@ -101,17 +101,17 @@ const steps = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 68px;
-    height: 68px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background: var(--color-bg);
     border: 1px solid var(--color-line-strong);
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     font-variant-numeric: tabular-nums;
     color: var(--color-accent);
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.2rem;
     transition: background-color var(--dur-med) var(--ease-out),
       color var(--dur-med) var(--ease-out), transform var(--dur-med) var(--ease-out);
   }

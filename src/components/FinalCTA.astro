@@ -51,6 +51,11 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
           <span><Icon name="map-pin" size={15} />{site.location}</span>
         </li>
       </ul>
+
+      <p class="cta-area">
+        Scheduled home &amp; workplace collection within Nairobi and surrounding
+        areas. Outside our regular coverage? Contact us to confirm availability.
+      </p>
     </div>
   </div>
 </section>
@@ -170,6 +175,15 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
   .cta-contact :global(.icon) {
     color: #e9a1a6;
     flex: none;
+  }
+
+  .cta-area {
+    position: relative;
+    max-width: 32rem;
+    margin: 1.6rem auto 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(247, 246, 242, 0.6);
   }
 
   @media (max-width: 480px) {
