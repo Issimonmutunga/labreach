@@ -54,15 +54,8 @@ const links = [
 
   <div class="container footer-bottom">
     <p class="footer-copy">© 2026 {site.brandName}. All Rights Reserved.</p>
-  </div>
-
-  <div class="container footer-disclaimer">
-    <p class="footer-label">Important Information</p>
-    <p>
-      Home sample collection is a specimen-collection service. Laboratory testing
-      is performed by the designated laboratory. Laboratory results should be
-      interpreted in the appropriate clinical context by a qualified healthcare
-      professional.
+    <p class="footer-copy">
+      <a href="/important-information" class="footer-legal">Important Information</a>
     </p>
   </div>
 </footer>
@@ -172,6 +165,11 @@ const links = [
     border-top: 1px solid var(--color-line);
     padding-top: 1.5rem;
     margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .footer-copy {
@@ -179,16 +177,15 @@ const links = [
     color: var(--color-ink-3);
   }
 
-  .footer-disclaimer {
-    margin-top: 2.25rem;
-    max-width: 46rem;
-    font-size: 0.82rem;
-    line-height: 1.6;
+  .footer-legal {
     color: var(--color-ink-3);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--dur-fast) var(--ease-out);
   }
 
-  .footer-disclaimer .footer-label {
-    margin-bottom: 0.5rem;
+  .footer-legal:hover {
+    color: var(--color-ink);
   }
 
   @media (max-width: 768px) {

@@ -1,0 +1,79 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Important Information | LabReach"
+  description="Important information about the LabReach home sample collection service."
+  path="/important-information"
+>
+  <section class="legal">
+    <div class="container legal-container">
+      <p class="legal-kicker">LabReach</p>
+      <h1 class="legal-title">Important Information</h1>
+      <p class="legal-note">
+        Home sample collection is a specimen-collection service. Laboratory
+        testing is performed by the designated laboratory. Laboratory results
+        should be interpreted in the appropriate clinical context by a qualified
+        healthcare professional.
+      </p>
+      <p class="legal-back">
+        <a href="/">← Back to home</a>
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal {
+    padding: clamp(72px, 12vw, 120px) 0;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .legal-container {
+    max-width: 42rem;
+  }
+
+  .legal-kicker {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+
+  .legal-title {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.6rem;
+  }
+
+  .legal-note {
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    line-height: 1.7;
+    color: var(--color-ink-2);
+    margin-bottom: 2.5rem;
+  }
+
+  .legal-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-pill);
+    padding: 0.6rem 1.25rem;
+    transition: border-color var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out);
+  }
+
+  .legal-back a:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+</style>
