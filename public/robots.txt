@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://labreach.example/sitemap-index.xml

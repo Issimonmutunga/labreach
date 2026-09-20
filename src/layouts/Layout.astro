@@ -1,0 +1,111 @@
+---
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import "../styles/global.css";
+
+import { site } from "../config/site";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const {
+  title = "Professional Home Laboratory Sample Collection | LabReach",
+  description = "Professional blood and laboratory specimen collection at your home, office or preferred location in Nairobi and surrounding areas.",
+  path = "/",
+} = Astro.props;
+
+const canonical = new URL(path, site.siteUrl).toString();
+const ogType = path === "/" ? "website" : "website";
+
+const fontFace = `@font-face{font-family:"Inter Variable";font-style:normal;font-display:swap;font-weight:100 900;src:url("${interLatin}") format("woff2-variations");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: site.brandName,
+  description:
+    "Professional home and workplace laboratory sample collection led by a qualified medical laboratory professional in Nairobi, Kenya.",
+  areaServed: {
+    "@type": "City",
+    name: "Nairobi",
+  },
+  serviceType: "Home laboratory sample collection",
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <style is:inline set:html={fontFace} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="mask-icon" href="/favicon.svg" color="#8c3b44" />
+    <meta name="theme-color" content="#f7f6f2" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.brandName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_KE" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+
+  <body>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloat />
+
+    <script>
+      // Progressive enhancement for reveal-on-scroll + sticky header state.
+      document.documentElement.classList.add("js");
+
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (!reduceMotion) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+        );
+
+        document
+          .querySelectorAll("[data-reveal]")
+          .forEach((el) => observer.observe(el));
+      } else {
+        document
+          .querySelectorAll("[data-reveal]")
+          .forEach((el) => el.classList.add("in-view"));
+      }
+    </script>
+  </body>
+</html>

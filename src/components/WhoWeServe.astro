@@ -1,0 +1,89 @@
+---
+const groups = [
+  "Individuals",
+  "Families",
+  "Busy professionals",
+  "Elderly clients",
+  "Home-based clients",
+  "Travellers",
+  "Corporate organisations",
+  "Patients requiring scheduled follow-up investigations",
+  "Clients who prefer private and convenient sample collection",
+];
+---
+
+<section class="section who">
+  <div class="container who-inner">
+    <div class="who-copy" data-reveal>
+      <p class="eyebrow">For People Like You</p>
+      <h2 class="h2">Healthcare That Fits Your Day</h2>
+      <p class="lede who-lede">Our home collection service can support:</p>
+    </div>
+
+    <ul class="who-list" data-reveal style="--reveal-delay:120ms">
+      {groups.map((g) => (
+        <li class="who-pill">{g}</li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .who {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .who-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(36px, 6vw, 88px);
+    align-items: start;
+  }
+
+  .who-copy h2 {
+    margin-top: 1.1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .who-lede {
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .who-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    justify-content: flex-end;
+  }
+
+  .who-pill {
+    padding: 0.72rem 1.25rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-line-strong);
+    background: rgba(255, 255, 255, 0.5);
+    font-size: 0.98rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  }
+
+  .who-pill:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 860px) {
+    .who-inner {
+      grid-template-columns: 1fr;
+    }
+    .who-list {
+      justify-content: flex-start;
+    }
+  }
+</style>

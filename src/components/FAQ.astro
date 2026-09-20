@@ -1,0 +1,150 @@
+---
+import Icon from "./Icon.astro";
+
+const faqs = [
+  {
+    q: "Do you perform the laboratory tests yourselves?",
+    a: "Our primary service is professional specimen collection. Depending on the requested investigation, specimens are delivered to the designated laboratory for analysis.",
+  },
+  {
+    q: "Can you come to my home?",
+    a: "Yes. Home visits can be scheduled within our service area.",
+  },
+  {
+    q: "Can you collect samples from my office?",
+    a: "Yes. Office and workplace collections can be arranged.",
+  },
+  {
+    q: "Do I need a doctor's request?",
+    a: "Some laboratory investigations may require a healthcare professional's request or prescription depending on the test and applicable requirements. We can guide you on the collection requirements.",
+  },
+  {
+    q: "How do I receive my results?",
+    a: "Results are issued through the designated laboratory's approved reporting channels.",
+  },
+  {
+    q: "Is my information confidential?",
+    a: "Yes. We are committed to appropriate confidentiality and responsible handling of client information.",
+  },
+];
+---
+
+<section class="section faq" id="faq">
+  <div class="container faq-grid">
+    <div class="faq-copy" data-reveal>
+      <p class="eyebrow">Questions, Answered</p>
+      <h2 class="h2">Frequently Asked Questions</h2>
+      <p class="faq-lede">
+        Everything you might want to know about how our collection service works.
+      </p>
+    </div>
+
+    <div class="faq-list" data-reveal style="--reveal-delay:100ms">
+      {faqs.map((item) => (
+        <details class="faq-item">
+          <summary>
+            <span>{item.q}</span>
+            <span class="faq-icon" aria-hidden="true">
+              <Icon name="chevron-down" size={18} strokeWidth={1.75} />
+            </span>
+          </summary>
+          <div class="faq-answer">
+            <p>{item.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(36px, 6vw, 88px);
+    align-items: start;
+  }
+
+  .faq-copy h2 {
+    margin-top: 1.1rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .faq-lede {
+    color: var(--color-ink-2);
+  }
+
+  .faq-list {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .faq-item summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.4rem 0.25rem;
+    font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+    font-weight: 550;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary:hover {
+    color: var(--color-accent);
+  }
+
+  .faq-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink-2);
+    transition: transform var(--dur-med) var(--ease-out), background-color var(--dur-med) var(--ease-out), color var(--dur-med) var(--ease-out);
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-surface);
+  }
+
+  .faq-answer {
+    padding: 0 0.25rem 1.4rem;
+    max-width: 40rem;
+  }
+
+  .faq-answer p {
+    color: var(--color-ink-2);
+    line-height: 1.7;
+  }
+
+  .faq-item[open] summary {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 860px) {
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

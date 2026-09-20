@@ -1,0 +1,152 @@
+---
+import Icon from "./Icon.astro";
+
+const services = [
+  {
+    num: "01",
+    title: "Blood Sample Collection",
+    copy: "Professional collection of blood specimens for requested laboratory investigations.",
+  },
+  {
+    num: "02",
+    title: "Routine Laboratory Testing Support",
+    copy: "Convenient collection for routine investigations requested by your healthcare provider.",
+  },
+  {
+    num: "03",
+    title: "Wellness Screening",
+    copy: "Convenient sample collection for individuals undertaking preventive health screening.",
+  },
+  {
+    num: "04",
+    title: "Home Monitoring & Follow-Up",
+    copy: "Scheduled collection for clients who require repeat laboratory investigations.",
+  },
+  {
+    num: "05",
+    title: "Corporate & Workplace Collection",
+    copy: "Convenient collection solutions for organisations and employee health programmes.",
+  },
+  {
+    num: "06",
+    title: "Family Collection",
+    copy: "Coordinate laboratory sample collection for several members of your household in one visit.",
+  },
+];
+---
+
+<section class="section services" id="services">
+  <div class="container">
+    <div class="services-head" data-reveal>
+      <p class="eyebrow">What We Offer</p>
+      <h2 class="h2">Our Services</h2>
+    </div>
+
+    <div class="service-list">
+      {services.map((s, i) => (
+        <a class="service-row" href="#booking" data-reveal style={`--reveal-delay:${Math.min(i, 3) * 60}ms`}>
+          <span class="service-num">{s.num}</span>
+          <span class="service-main">
+            <span class="service-title">{s.title}</span>
+            <span class="service-copy">{s.copy}</span>
+          </span>
+          <span class="service-arrow" aria-hidden="true">
+            <Icon name="arrow-right" size={22} strokeWidth={1.5} />
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .services-head {
+    max-width: 40rem;
+    margin-bottom: clamp(32px, 5vw, 56px);
+  }
+
+  .services-head h2 {
+    margin-top: 1.1rem;
+  }
+
+  .service-list {
+    border-top: 1px solid var(--color-line-strong);
+  }
+
+  .service-row {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(16px, 3vw, 40px);
+    padding: clamp(22px, 3.4vw, 36px) 0.5rem;
+    border-bottom: 1px solid var(--color-line);
+    transition: background-color var(--dur-med) var(--ease-out), padding-left var(--dur-med) var(--ease-out);
+  }
+
+  .service-row:hover {
+    background: rgba(255, 255, 255, 0.55);
+    padding-left: 1.2rem;
+  }
+
+  .service-num {
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+  }
+
+  .service-main {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .service-title {
+    font-size: clamp(1.35rem, 2.6vw, 2.1rem);
+    font-weight: 550;
+    letter-spacing: -0.022em;
+    line-height: 1.15;
+  }
+
+  .service-copy {
+    color: var(--color-ink-2);
+    max-width: 42rem;
+    font-size: 0.97rem;
+  }
+
+  .service-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink-2);
+    transition: transform var(--dur-med) var(--ease-out), background-color var(--dur-med) var(--ease-out), border-color var(--dur-med) var(--ease-out), color var(--dur-med) var(--ease-out);
+  }
+
+  .service-row:hover .service-arrow {
+    transform: translateX(5px);
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-surface);
+  }
+
+  @media (max-width: 640px) {
+    .service-row {
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 12px;
+    }
+    .service-num {
+      font-size: 0.8rem;
+    }
+    .service-arrow {
+      display: none;
+    }
+  }
+</style>

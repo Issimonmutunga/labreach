@@ -1,0 +1,180 @@
+---
+import { site, telLink, mailLink, whatsappLink, WHATSAPP_MESSAGE } from "../config/site";
+import Icon from "./Icon.astro";
+
+const tel = telLink();
+const mail = mailLink();
+const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
+---
+
+<section class="section cta">
+  <div class="container">
+    <div class="cta-panel" data-reveal>
+      <p class="cta-eyebrow">{site.brandName}</p>
+      <h2 class="cta-title">Your Health. Your Time.<br />Your Convenience.</h2>
+      <p class="cta-sub">Professional laboratory sample collection brought closer to you.</p>
+
+      <div class="cta-actions">
+        <a class="btn cta-btn-primary" href="#booking">
+          Book a Home Visit
+          <Icon class="icon-arrow" name="arrow-right" size={18} />
+        </a>
+        {whatsappHref ? (
+          <a class="btn cta-btn-secondary" href={whatsappHref} target="_blank" rel="noopener">
+            <Icon name="message-circle" size={18} />
+            WhatsApp Us
+          </a>
+        ) : (
+          <span class="btn cta-btn-secondary btn--disabled" aria-disabled="true">
+            <Icon name="message-circle" size={18} />
+            WhatsApp Us
+          </span>
+        )}
+      </div>
+
+      <ul class="cta-contact">
+        <li>
+          {tel ? (
+            <a href={tel}><Icon name="phone" size={15} />{site.phone}</a>
+          ) : (
+            <span><Icon name="phone" size={15} />{site.phone}</span>
+          )}
+        </li>
+        <li>
+          {mail ? (
+            <a href={mail}><Icon name="mail" size={15} />{site.email}</a>
+          ) : (
+            <span><Icon name="mail" size={15} />{site.email}</span>
+          )}
+        </li>
+        <li>
+          <span><Icon name="map-pin" size={15} />{site.location}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding-block: clamp(48px, 7vw, 84px);
+  }
+
+  .cta-panel {
+    position: relative;
+    background: var(--color-ink);
+    color: #f7f6f2;
+    border-radius: var(--radius-l);
+    padding: clamp(56px, 8vw, 104px) clamp(24px, 7vw, 96px);
+    text-align: center;
+    overflow: hidden;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .cta-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(720px 320px at 72% 12%, rgba(140, 59, 68, 0.32), transparent 62%),
+      radial-gradient(560px 280px at 12% 88%, rgba(220, 210, 190, 0.16), transparent 60%);
+  }
+
+  .cta-eyebrow {
+    position: relative;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: #e9a1a6;
+    margin-bottom: 1.4rem;
+  }
+
+  .cta-title {
+    position: relative;
+    font-size: clamp(2.3rem, 5.2vw, 4.4rem);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  .cta-sub {
+    position: relative;
+    color: rgba(247, 246, 242, 0.72);
+    margin-top: 1.4rem;
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  }
+
+  .cta-actions {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-top: 2.4rem;
+  }
+
+  .cta-btn-primary {
+    background: #f7f6f2;
+    color: var(--color-ink);
+  }
+
+  .cta-btn-primary:hover {
+    background: #ffffff;
+    box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.55);
+  }
+
+  .cta-btn-secondary {
+    background: transparent;
+    color: #f7f6f2;
+    border: 1px solid rgba(247, 246, 242, 0.35);
+  }
+
+  .cta-btn-secondary:hover {
+    border-color: #f7f6f2;
+    background: rgba(247, 246, 242, 0.08);
+  }
+
+  .cta-contact {
+    position: relative;
+    list-style: none;
+    margin: 2.6rem auto 0;
+    padding: 1.4rem 0 0;
+    max-width: 34rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem 2.2rem;
+    border-top: 1px solid rgba(247, 246, 242, 0.18);
+  }
+
+  .cta-contact li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.94rem;
+    color: rgba(247, 246, 242, 0.78);
+  }
+
+  .cta-contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .cta-contact a:hover {
+    color: #ffffff;
+  }
+
+  .cta-contact :global(.icon) {
+    color: #e9a1a6;
+    flex: none;
+  }
+
+  @media (max-width: 480px) {
+    .cta-actions .btn {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,114 @@
+---
+import home from "lucide-static/icons/home.svg?raw";
+import building2 from "lucide-static/icons/building-2.svg?raw";
+import hotel from "lucide-static/icons/hotel.svg?raw";
+import briefcase from "lucide-static/icons/briefcase.svg?raw";
+import shieldCheck from "lucide-static/icons/shield-check.svg?raw";
+import lockKeyhole from "lucide-static/icons/lock-keyhole.svg?raw";
+import checkIcon from "lucide-static/icons/check.svg?raw";
+import clock from "lucide-static/icons/clock.svg?raw";
+import mapPin from "lucide-static/icons/map-pin.svg?raw";
+import phone from "lucide-static/icons/phone.svg?raw";
+import mail from "lucide-static/icons/mail.svg?raw";
+import messageCircle from "lucide-static/icons/message-circle.svg?raw";
+import calendar from "lucide-static/icons/calendar.svg?raw";
+import droplet from "lucide-static/icons/droplet.svg?raw";
+import heartPulse from "lucide-static/icons/heart-pulse.svg?raw";
+import users from "lucide-static/icons/users.svg?raw";
+import activity from "lucide-static/icons/activity.svg?raw";
+import user from "lucide-static/icons/user.svg?raw";
+import handHeart from "lucide-static/icons/hand-heart.svg?raw";
+import timer from "lucide-static/icons/timer.svg?raw";
+import arrowRight from "lucide-static/icons/arrow-right.svg?raw";
+import arrowUpRight from "lucide-static/icons/arrow-up-right.svg?raw";
+import chevronDown from "lucide-static/icons/chevron-down.svg?raw";
+
+type IconName =
+  | "home"
+  | "building-2"
+  | "hotel"
+  | "briefcase"
+  | "shield-check"
+  | "lock-keyhole"
+  | "check"
+  | "clock"
+  | "map-pin"
+  | "phone"
+  | "mail"
+  | "message-circle"
+  | "calendar"
+  | "droplet"
+  | "heart-pulse"
+  | "users"
+  | "activity"
+  | "user"
+  | "hand-heart"
+  | "timer"
+  | "arrow-right"
+  | "arrow-up-right"
+  | "chevron-down";
+
+const icons: Record<IconName, string> = {
+  home,
+  "building-2": building2,
+  hotel,
+  briefcase,
+  "shield-check": shieldCheck,
+  "lock-keyhole": lockKeyhole,
+  check: checkIcon,
+  clock,
+  "map-pin": mapPin,
+  phone,
+  mail,
+  "message-circle": messageCircle,
+  calendar,
+  droplet,
+  "heart-pulse": heartPulse,
+  users,
+  activity,
+  user,
+  "hand-heart": handHeart,
+  timer,
+  "arrow-right": arrowRight,
+  "arrow-up-right": arrowUpRight,
+  "chevron-down": chevronDown,
+};
+
+interface Props {
+  name: IconName;
+  size?: number;
+  strokeWidth?: number;
+  label?: string;
+  class?: string;
+}
+
+const { name, size = 20, strokeWidth = 1.75 } = Astro.props;
+const raw = icons[name];
+const withStroke = raw.replaceAll(
+  'stroke-width="2"',
+  `stroke-width="${strokeWidth}"`,
+);
+---
+
+<div
+  class:list={["icon", Astro.props.class]}
+  style={`--icon-size:${size}px`}
+  set:html={withStroke}
+  {...(Astro.props.label ? { role: "img", "aria-label": Astro.props.label } : { "aria-hidden": "true" })}
+/>
+
+<style>
+  .icon {
+    display: inline-flex;
+    flex: none;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    align-items: center;
+    justify-content: center;
+  }
+  .icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+  }
+</style>

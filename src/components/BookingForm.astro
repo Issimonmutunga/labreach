@@ -1,0 +1,492 @@
+---
+import { site, whatsappLink } from "../config/site";
+import Icon from "./Icon.astro";
+
+const whatsappHref = whatsappLink(
+  "Hello, I would like to request a home collection appointment.",
+);
+const whatsappBase = whatsappLink("");
+---
+
+<section class="section booking" id="booking">
+  <div class="container booking-grid">
+    <div class="booking-copy" data-reveal>
+      <p class="eyebrow">Book With Confidence</p>
+      <h2 class="h2">Simple, Transparent Booking</h2>
+      <p class="booking-sub">
+        <span class="booking-sub-label">Request a Collection</span>
+      </p>
+      <p class="lede booking-lede">
+        Tell us about your collection needs and we will take care of the rest.
+      </p>
+      <ul class="booking-notes">
+        <li>
+          <Icon name="check" size={15} strokeWidth={2} />
+          Confirmed appointment by our team
+        </li>
+        <li>
+          <Icon name="check" size={15} strokeWidth={2} />
+          Clear collection requirements
+        </li>
+        <li>
+          <Icon name="check" size={15} strokeWidth={2} />
+          Applicable charges shared upfront
+        </li>
+      </ul>
+
+      <p class="booking-alt-label">Prefer to chat first?</p>
+      {whatsappHref ? (
+        <a class="btn btn-secondary" href={whatsappHref} target="_blank" rel="noopener">
+          <Icon name="message-circle" size={18} />
+          Continue via WhatsApp
+        </a>
+      ) : (
+        <span class="btn btn-secondary btn--disabled" aria-disabled="true">
+          <Icon name="message-circle" size={18} />
+          Continue via WhatsApp
+        </span>
+      )}
+    </div>
+
+    <div class="booking-card" data-reveal style="--reveal-delay:120ms">
+      <form
+        id="booking-form"
+        class="booking-form"
+        novalidate
+        {...(site.formEndpoint ? { action: site.formEndpoint, method: "post" } : {})}
+      >
+        <div class="field">
+          <label for="bk-name">Name</label>
+          <input
+            id="bk-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            placeholder="Your full name"
+            required
+            aria-describedby="bk-name-err"
+          />
+          <p class="field-err" id="bk-name-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="bk-phone">Phone / WhatsApp</label>
+          <input
+            id="bk-phone"
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            placeholder="Phone number we can reach you on"
+            required
+            aria-describedby="bk-phone-err"
+          />
+          <p class="field-err" id="bk-phone-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="bk-location">Location</label>
+          <input
+            id="bk-location"
+            name="location"
+            type="text"
+            autocomplete="street-address"
+            placeholder="Home, office or preferred location"
+            required
+            aria-describedby="bk-location-err"
+          />
+          <p class="field-err" id="bk-location-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="bk-date">Preferred Date</label>
+            <input
+              id="bk-date"
+              name="date"
+              type="date"
+              required
+              aria-describedby="bk-date-err"
+            />
+            <p class="field-err" id="bk-date-err" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="bk-time">Preferred Time</label>
+            <input
+              id="bk-time"
+              name="time"
+              type="time"
+              required
+              aria-describedby="bk-time-err"
+            />
+            <p class="field-err" id="bk-time-err" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="bk-tests">Laboratory Test(s)</label>
+          <textarea
+            id="bk-tests"
+            name="tests"
+            rows="3"
+            placeholder="e.g. Full blood count, lipid profile"
+            required
+            aria-describedby="bk-tests-err"
+          ></textarea>
+          <p class="field-err" id="bk-tests-err" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="bk-doctor">Doctor / Facility (if applicable)</label>
+          <input
+            id="bk-doctor"
+            name="doctor"
+            type="text"
+            autocomplete="organization"
+            aria-describedby="bk-doctor-err"
+          />
+          <p class="field-err" id="bk-doctor-err" aria-live="polite"></p>
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit">
+          Request Home Collection
+          <Icon class="icon-arrow" name="arrow-right" size={18} />
+        </button>
+
+        <p class="form-footnote">
+          A member of our team will contact you to confirm the appointment,
+          collection requirements and applicable charges.
+        </p>
+      </form>
+
+      <div class="booking-success" id="booking-success" hidden tabindex="-1" role="status" aria-live="polite">
+        <span class="success-mark" aria-hidden="true">
+          <Icon name="check" size={24} strokeWidth={2} />
+        </span>
+        <h3 class="success-title">Request received</h3>
+        <p class="success-copy">
+          Thank you — a member of our team will contact you to confirm the
+          appointment, collection requirements and applicable charges.
+        </p>
+        <a
+          class="btn btn-secondary btn-block"
+          id="success-whatsapp"
+          data-href={whatsappBase}
+          href="#"
+          target="_blank"
+          rel="noopener"
+          hidden
+        >
+          <Icon name="message-circle" size={18} />
+          Continue via WhatsApp
+        </a>
+        <button type="button" class="text-link success-back" id="success-back">
+          Submit another request
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("booking-form") as HTMLFormElement | null;
+  const success = document.getElementById("booking-success") as HTMLElement | null;
+  const successWhatsapp = document.getElementById(
+    "success-whatsapp",
+  ) as HTMLAnchorElement | null;
+
+  type Field = HTMLInputElement | HTMLTextAreaElement;
+
+  const fields: Field[] = form
+    ? Array.from(form.querySelectorAll<Field>("input, textarea"))
+    : [];
+
+  const showError = (field: Field, message: string) => {
+    field.setAttribute("aria-invalid", "true");
+    const err = document.getElementById(field.id + "-err");
+    if (err) err.textContent = message;
+  };
+
+  const clearError = (field: Field) => {
+    field.removeAttribute("aria-invalid");
+    const err = document.getElementById(field.id + "-err");
+    if (err) err.textContent = "";
+  };
+
+  const value = (field: Field) => field.value.trim();
+
+  const validateField = (field: Field) => {
+    clearError(field);
+    if (field.required && value(field) === "") {
+      showError(field, "Please fill in this field.");
+      return false;
+    }
+    if (field.id === "bk-phone") {
+      const digits = value(field).replace(/[^\d]/g, "");
+      if (digits.length < 6) {
+        showError(field, "Please enter a valid phone number.");
+        return false;
+      }
+    }
+    return true;
+  };
+
+  fields.forEach((field) => {
+    field.addEventListener("blur", () => {
+      if (value(field) || field.getAttribute("aria-invalid")) validateField(field);
+    });
+    field.addEventListener("input", () => {
+      if (field.getAttribute("aria-invalid")) validateField(field);
+    });
+  });
+
+  const buildMessage = () => {
+    const get = (id: string) =>
+      value(document.getElementById(id) as Field);
+    return [
+      "Hello LabReach, I would like to request a home collection.",
+      `Name: ${get("bk-name")}`,
+      `Phone: ${get("bk-phone")}`,
+      `Location: ${get("bk-location")}`,
+      `Preferred date: ${get("bk-date")}`,
+      `Preferred time: ${get("bk-time")}`,
+      `Laboratory test(s): ${get("bk-tests")}`,
+      get("bk-doctor") ? `Doctor / Facility: ${get("bk-doctor")}` : null,
+    ]
+      .filter(Boolean)
+      .join("\n");
+  };
+
+  const whatsappBase = successWhatsapp?.dataset.href || "";
+
+  form?.addEventListener("submit", (e: Event) => {
+    e.preventDefault();
+
+    let firstInvalid: string | null = null;
+    for (const field of fields) {
+      if (!validateField(field) && !firstInvalid) {
+        firstInvalid = field.id;
+      }
+    }
+
+    if (firstInvalid) {
+      document.getElementById(firstInvalid)?.focus();
+      return;
+    }
+
+    const payload = new FormData(form);
+    const endpoint = form.getAttribute("action");
+
+    if (endpoint) {
+      fetch(endpoint, { method: form.getAttribute("method") || "POST", body: payload })
+        .then(() => showSuccess())
+        .catch(() => showSuccess());
+    } else {
+      showSuccess();
+    }
+  });
+
+  function showSuccess() {
+    if (successWhatsapp && whatsappBase) {
+      successWhatsapp.href = whatsappBase + encodeURIComponent(buildMessage());
+      successWhatsapp.hidden = false;
+    }
+    form?.setAttribute("hidden", "");
+    success?.removeAttribute("hidden");
+    success?.focus();
+  }
+
+  document.getElementById("success-back")?.addEventListener("click", () => {
+    form?.removeAttribute("hidden");
+    success?.setAttribute("hidden", "");
+    form?.reset();
+    if (successWhatsapp) successWhatsapp.hidden = true;
+  });
+</script>
+
+<style>
+  .booking {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .booking-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+
+  .booking-copy h2 {
+    margin-top: 1.1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .booking-sub-label {
+    display: inline-block;
+    font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+    font-weight: 550;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 0.9rem;
+  }
+
+  .booking-lede {
+    max-width: 32rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .booking-notes {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .booking-notes li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-ink-2);
+    font-size: 0.97rem;
+  }
+
+  .booking-notes :global(.icon) {
+    color: var(--color-accent);
+    flex: none;
+  }
+
+  .booking-alt-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+    margin-bottom: 0.8rem;
+  }
+
+  .booking-card {
+    position: relative;
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-l);
+    padding: clamp(24px, 3.5vw, 44px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .booking-form {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .field {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .field label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    min-height: 52px;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-s);
+    border: 1px solid var(--color-line-strong);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+  }
+
+  .field textarea {
+    min-height: 96px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .field input[aria-invalid="true"],
+  .field textarea[aria-invalid="true"] {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--color-ink-3);
+  }
+
+  .field-err {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    min-height: 1.2em;
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  .form-footnote {
+    font-size: 0.86rem;
+    color: var(--color-ink-3);
+    line-height: 1.55;
+  }
+
+  .booking-success {
+    text-align: center;
+    padding: 1rem 0;
+    outline: none;
+  }
+
+  .success-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .success-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.7rem;
+  }
+
+  .success-copy {
+    color: var(--color-ink-2);
+    max-width: 30rem;
+    margin: 0 auto 1.6rem;
+  }
+
+  .success-back {
+    margin-top: 1.1rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .booking-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .field-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

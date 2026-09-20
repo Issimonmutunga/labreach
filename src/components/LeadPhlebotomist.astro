@@ -1,0 +1,163 @@
+---
+import { site } from "../config/site";
+import Icon from "./Icon.astro";
+---
+
+<section class="section lead" id="about">
+  <div class="container about-grid">
+    <div class="about-media" data-reveal>
+      <div class="about-photo">
+        <img
+          src={site.leadPhoto}
+          alt="Portrait of Jeff Nyakaba, Lead Phlebotomist at LabReach"
+          width="800"
+          height="1000"
+          loading="lazy"
+        />
+      </div>
+      <div class="about-badge" aria-hidden="true">
+        <Icon name="shield-check" size={16} />
+        <span>MLS · Lean Six Sigma</span>
+      </div>
+    </div>
+
+    <div class="about-copy">
+      <p class="eyebrow" data-reveal>Led by a Professional</p>
+      <h2 class="h2" data-reveal style="--reveal-delay:80ms">
+        Meet Our Lead Phlebotomist
+      </h2>
+
+      <p class="about-name" data-reveal style="--reveal-delay:160ms">
+        Jeff Nyakaba, MLS, Lean Six Sigma
+      </p>
+      <p class="about-role" data-reveal style="--reveal-delay:200ms">
+        Medical Laboratory Scientist | Phlebotomy & Laboratory Services
+        Professional
+      </p>
+
+      <div class="about-body" data-reveal style="--reveal-delay:260ms">
+        <p>
+          Our service is led by Jeff Nyakaba, a medical laboratory professional
+          with experience in laboratory operations, specimen collection, patient
+          engagement and quality-focused healthcare service delivery.
+        </p>
+        <p>
+          His approach combines professional laboratory practice with a strong
+          focus on patient experience, specimen quality and convenience.
+        </p>
+      </div>
+
+      <blockquote class="about-quote" data-reveal style="--reveal-delay:320ms">
+        <p>“Quality laboratory testing starts with quality specimen collection.”</p>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lead {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(40px, 6vw, 100px);
+    align-items: center;
+  }
+
+  .about-media {
+    position: relative;
+  }
+
+  .about-photo {
+    border-radius: 220px 220px 24px 24px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-badge {
+    position: absolute;
+    right: 12px;
+    bottom: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    border-radius: var(--radius-pill);
+    background: rgba(247, 246, 242, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(23, 23, 23, 0.08);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--color-ink);
+  }
+
+  .about-badge :global(.icon) {
+    color: var(--color-accent);
+  }
+
+  .about-copy .eyebrow {
+    margin-bottom: 1.2rem;
+  }
+
+  .about-name {
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    margin-top: 1.6rem;
+  }
+
+  .about-role {
+    color: var(--color-accent);
+    font-weight: 550;
+    font-size: 0.98rem;
+    margin-top: 0.35rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .about-body p {
+    color: var(--color-ink-2);
+    max-width: 34rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-quote {
+    position: relative;
+    max-width: 34rem;
+    padding: 1.6rem 1.8rem;
+    margin-top: 1.8rem;
+    border-radius: var(--radius-m);
+    background: var(--color-accent-soft);
+    border-left: 3px solid var(--color-accent);
+  }
+
+  .about-quote p {
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.45;
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-media {
+      max-width: 460px;
+    }
+  }
+</style>

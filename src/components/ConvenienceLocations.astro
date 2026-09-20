@@ -1,0 +1,183 @@
+---
+import Icon from "./Icon.astro";
+
+const blocks = [
+  {
+    icon: "home" as const,
+    index: "01",
+    title: "Home",
+    copy: "Professional sample collection from the comfort of your home.",
+  },
+  {
+    icon: "building-2" as const,
+    index: "02",
+    title: "Office",
+    copy: "Keep your day moving while we come to your workplace.",
+  },
+  {
+    icon: "hotel" as const,
+    index: "03",
+    title: "Hotel",
+    copy: "Convenient collection for travellers, visitors and guests.",
+  },
+  {
+    icon: "briefcase" as const,
+    index: "04",
+    title: "Corporate",
+    copy: "Organised sample collection for workplaces and groups.",
+  },
+];
+---
+
+<section class="section convenience" id="convenience">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Anywhere That Works for You</p>
+      <h2 class="h2">Laboratory Sample Collection<br />Made Convenient</h2>
+      <p class="lede convenience-support">Your time matters.</p>
+      <p class="convenience-body">
+        Instead of travelling to a laboratory and waiting in line, schedule a
+        professional phlebotomy visit at a time and location that works for you.
+      </p>
+    </div>
+
+    <div class="blocks">
+      {blocks.map((b, i) => (
+        <article class="block" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+          <div class="block-top">
+            <span class="block-icon"><Icon name={b.icon} size={22} strokeWidth={1.5} /></span>
+            <span class="block-index">{b.index}</span>
+          </div>
+          <h3 class="block-title">{b.title}</h3>
+          <p class="block-copy">{b.copy}</p>
+          <span class="block-arrow" aria-hidden="true">
+            <Icon name="arrow-up-right" size={20} strokeWidth={1.5} />
+          </span>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .convenience {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .section-head {
+    max-width: 44rem;
+    margin-bottom: clamp(40px, 6vw, 72px);
+  }
+
+  .section-head h2 {
+    margin: 1.1rem 0 1.4rem;
+  }
+
+  .convenience-support {
+    font-weight: 550;
+    color: var(--color-ink);
+    margin-bottom: 1rem;
+  }
+
+  .convenience-body {
+    color: var(--color-ink-2);
+    max-width: 32rem;
+  }
+
+  .blocks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--color-line-strong);
+    border-left: 1px solid var(--color-line-strong);
+  }
+
+  .block {
+    position: relative;
+    min-height: 300px;
+    padding: clamp(28px, 4vw, 48px);
+    border-right: 1px solid var(--color-line-strong);
+    border-bottom: 1px solid var(--color-line-strong);
+    background: rgba(255, 255, 255, 0);
+    transition: background-color var(--dur-med) var(--ease-out),
+      transform var(--dur-med) var(--ease-out);
+  }
+
+  .block:hover {
+    background: var(--color-surface);
+    transform: translateY(-4px);
+    box-shadow: 0 2px 2px rgba(23, 23, 23, 0.02);
+  }
+
+  .block-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+
+  .block-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--color-warm);
+    color: var(--color-accent);
+    border: 1px solid rgba(23, 23, 23, 0.06);
+  }
+
+  .block-index {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--color-ink-3);
+  }
+
+  .block-title {
+    font-size: 1rem;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+
+  .block-copy {
+    color: var(--color-ink-2);
+    max-width: 22rem;
+    line-height: 1.65;
+  }
+
+  .block-arrow {
+    position: absolute;
+    right: 28px;
+    bottom: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink-2);
+    transition: transform var(--dur-med) var(--ease-out),
+      background-color var(--dur-med) var(--ease-out), border-color var(--dur-med) var(--ease-out),
+      color var(--dur-med) var(--ease-out);
+  }
+
+  .block:hover .block-arrow {
+    transform: translate(4px, -4px);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-surface);
+  }
+
+  @media (max-width: 768px) {
+    .blocks {
+      grid-template-columns: 1fr;
+    }
+    .block {
+      min-height: 260px;
+    }
+  }
+</style>

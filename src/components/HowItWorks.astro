@@ -1,0 +1,182 @@
+---
+import Icon from "./Icon.astro";
+
+const steps = [
+  {
+    num: "01",
+    label: "BOOK",
+    copy: "Send us a WhatsApp message, call us or complete our online booking form.",
+  },
+  {
+    num: "02",
+    label: "SCHEDULE",
+    copy: "Choose your preferred date, time and location.",
+  },
+  {
+    num: "03",
+    label: "WE COME TO YOU",
+    copy: "A qualified professional arrives at your selected location for specimen collection.",
+  },
+  {
+    num: "04",
+    label: "SPECIMEN HANDLING",
+    copy: "Your specimen is correctly identified, labelled and handled for transportation to the designated laboratory.",
+  },
+  {
+    num: "05",
+    label: "RESULTS",
+    copy: "The designated laboratory processes the specimen and releases the results through its appropriate reporting channels.",
+  },
+];
+---
+
+<section class="section how" id="how-it-works">
+  <div class="container">
+    <div class="how-head" data-reveal>
+      <p class="eyebrow">A Simple Process</p>
+      <h2 class="h2">How It Works</h2>
+    </div>
+
+    <ol class="pipeline">
+      {steps.map((s, i) => (
+        <li class="step" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+          <span class="step-marker">{s.num}</span>
+          <div class="step-body">
+            <span class="step-label">{s.label}</span>
+            <p class="step-copy">{s.copy}</p>
+          </div>
+          {i < steps.length - 1 && (
+            <span class="step-connect" aria-hidden="true">
+              <Icon name="chevron-down" size={16} strokeWidth={1.75} />
+            </span>
+          )}
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .how {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .how-head {
+    max-width: 40rem;
+    margin-bottom: clamp(40px, 6vw, 64px);
+  }
+
+  .how-head h2 {
+    margin-top: 1.1rem;
+  }
+
+  .pipeline {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .pipeline::before {
+    content: "";
+    position: absolute;
+    top: 34px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-line);
+  }
+
+  .step {
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 1px solid var(--color-line-strong);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-accent);
+    margin-bottom: 1.25rem;
+    transition: background-color var(--dur-med) var(--ease-out),
+      color var(--dur-med) var(--ease-out), transform var(--dur-med) var(--ease-out);
+  }
+
+  .step:hover .step-marker {
+    background: var(--color-accent);
+    color: var(--color-surface);
+    transform: translateY(-3px);
+  }
+
+  .step-label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .step-copy {
+    color: var(--color-ink-2);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .step-connect {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    .pipeline {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 40px;
+      column-gap: 40px;
+    }
+    .pipeline::before {
+      display: none;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .pipeline {
+      grid-template-columns: 1fr;
+      row-gap: 8px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 20px;
+      align-items: start;
+    }
+    .step-marker {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 0;
+    }
+    .step-connect {
+      grid-column: 1;
+      display: inline-flex;
+      justify-content: center;
+      padding: 10px 0;
+      color: var(--color-ink-3);
+    }
+    .step-connect :global(.icon) {
+      transform: rotate(90deg);
+    }
+  }
+</style>
