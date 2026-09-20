@@ -4,8 +4,8 @@ export const site = {
   email: "[EMAIL ADDRESS]",
   whatsapp: "[WHATSAPP NUMBER]",
   location: "Nairobi, Kenya",
-  /** Replace with the production URL before launch. */
-  siteUrl: "https://labreach.example",
+  /** Production deployment URL. */
+  siteUrl: "https://labreach-tau.vercel.app",
   /** Replace with Jeff's real portrait file when available (keep the path constant or update here). */
   leadPhoto: "/images/lead-phlebotomist.svg",
   /** Replace with a real editorial photograph when available. */

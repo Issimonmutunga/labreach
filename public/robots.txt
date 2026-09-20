@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://labreach.example/sitemap-index.xml
+Sitemap: https://labreach-tau.vercel.app/sitemap-index.xml
