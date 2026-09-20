@@ -18,7 +18,7 @@ const links = [
         <span class="brand-mark" aria-hidden="true">
           <Icon name="droplet" size={16} strokeWidth={1.6} />
         </span>
-        <span>{site.brandName}</span>
+        <span class="footer-brand-name">{site.brandName}</span>
       </a>
       <p class="footer-tagline">Professional Laboratory Sample Collection</p>
       <p class="footer-location">
@@ -53,7 +53,7 @@ const links = [
   </div>
 
   <div class="container footer-bottom">
-    <p class="footer-copy">© 2026 {site.brandName}. All Rights Reserved.</p>
+    <p class="footer-copy">© 2026 <span class="brand-inline">{site.brandName}</span>. All Rights Reserved.</p>
     <p class="footer-copy">
       <a href="/important-information" class="footer-legal">Important Information</a>
     </p>
@@ -80,10 +80,14 @@ const links = [
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    font-weight: 650;
+    font-weight: 600;
     font-size: 1.1rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     margin-bottom: 1rem;
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-brand);
   }
 
   .brand-mark {
@@ -175,6 +179,12 @@ const links = [
   .footer-copy {
     font-size: 0.88rem;
     color: var(--color-ink-3);
+  }
+
+  .brand-inline {
+    font-family: var(--font-brand);
+    font-weight: 500;
+    color: var(--color-ink-2);
   }
 
   .footer-legal {

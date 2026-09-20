@@ -194,9 +194,7 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
   }
 
   .site-header.is-scrolled {
-    background: var(--color-header-bg);
-    -webkit-backdrop-filter: saturate(1.4) blur(16px);
-    backdrop-filter: saturate(1.4) blur(16px);
+    background: var(--color-bg);
     border-bottom-color: var(--color-line);
   }
 
@@ -212,9 +210,13 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    font-weight: 650;
+    font-weight: 600;
     font-size: 1.05rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
+  }
+
+  .brand-name {
+    font-family: var(--font-brand);
   }
 
   .brand-mark {
