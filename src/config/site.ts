@@ -1,13 +1,13 @@
 export const site = {
   brandName: "LabReach",
-  phone: "[PHONE NUMBER]",
-  email: "[EMAIL ADDRESS]",
-  whatsapp: "[WHATSAPP NUMBER]",
+  phone: "0726049872",
+  whatsapp: "0726049872",
+  email: "",
   location: "Nairobi, Kenya",
   /** Production deployment URL. */
   siteUrl: "https://labreach-tau.vercel.app",
-  /** Replace with Jeff's real portrait file when available (keep the path constant or update here). */
-  leadPhoto: "/images/lead-phlebotomist.svg",
+  /** Lead phlebotomist portrait. */
+  leadPhoto: "/images/lead-phlebotomist.jpg",
   /** Replace with a real editorial photograph when available. */
   heroImage: "/images/hero-photograph.svg",
   /** Optional real form endpoint (e.g. a form service URL). When empty, the
@@ -38,7 +38,9 @@ export function mailLink(): string | null {
 export function whatsappLink(message: string): string | null {
   if (!hasRealPhone(site.whatsapp)) return null;
   const text = encodeURIComponent(message);
-  return `https://wa.me/${digitsOnly(site.whatsapp)}?text=${text}`;
+  const local = digitsOnly(site.whatsapp);
+  const international = local.startsWith("0") ? `254${local.slice(1)}` : local;
+  return `https://wa.me/${international}?text=${text}`;
 }
 
 /** WhatsApp prefill used across the site. */

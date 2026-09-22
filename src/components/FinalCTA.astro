@@ -1,9 +1,8 @@
 ---
-import { site, telLink, mailLink, whatsappLink, WHATSAPP_MESSAGE } from "../config/site";
+import { site, telLink, whatsappLink, WHATSAPP_MESSAGE } from "../config/site";
 import Icon from "./Icon.astro";
 
 const tel = telLink();
-const mail = mailLink();
 const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
 ---
 
@@ -41,10 +40,12 @@ const whatsappHref = whatsappLink(WHATSAPP_MESSAGE);
           )}
         </li>
         <li>
-          {mail ? (
-            <a href={mail}><Icon name="mail" size={15} />{site.email}</a>
+          {whatsappHref ? (
+            <a href={whatsappHref} target="_blank" rel="noopener">
+              <Icon name="message-circle" size={15} />{site.whatsapp}
+            </a>
           ) : (
-            <span><Icon name="mail" size={15} />{site.email}</span>
+            <span><Icon name="message-circle" size={15} />{site.whatsapp}</span>
           )}
         </li>
         <li>
